@@ -1,47 +1,89 @@
-<script setup>
-import HelloWorld from './components/HelloWorld.vue'
-import TheWelcome from './components/TheWelcome.vue'
-</script>
-
+<!-- App.vue -->
 <template>
-  <header>
-    <img alt="Vue logo" class="logo" src="./assets/logo.svg" width="125" height="125" />
+  <div class="container mx-auto p-4 bg-gray-100 min-h-screen">
+    <h1 class="text-3xl font-bold mb-8">Vue Contact App</h1>
 
-    <div class="wrapper">
-      <HelloWorld msg="You did it!" />
+    <!-- Button to open AddContact pop-up -->
+    <button
+      @click="openAddContactModal"
+      class="fixed bottom-4 right-4 bg-blue-500 text-white px-4 py-2 rounded-full"
+    >
+      Add Contact
+    </button>
+
+    <!-- AddContact pop-up -->
+    <div
+      v-if="showAddContactModal"
+      class="fixed inset-0 flex items-center justify-center"
+    >
+      <div class="bg-black opacity-50 absolute inset-0 z-50"></div>
+      <AddContact
+        @add="addContact"
+        @cancel="closeAddContactModal"
+        class="z-50"
+      />
     </div>
-  </header>
 
-  <main>
-    <TheWelcome />
-  </main>
+    <ContactList
+      :contacts="contacts"
+      @edit="editContact"
+      @delete="deleteContact"
+    />
+  </div>
 </template>
 
-<style scoped>
-header {
-  line-height: 1.5;
-}
+<script>
+import ContactList from "./components/contact/ContactList.vue";
+import AddContact from "./components/contact/AddContact.vue";
+import EditContact from "./components/contact/EditContact.vue";
 
-.logo {
-  display: block;
-  margin: 0 auto 2rem;
-}
-
-@media (min-width: 1024px) {
-  header {
-    display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
-  }
-
-  .logo {
-    margin: 0 2rem 0 0;
-  }
-
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
-  }
-}
-</style>
+export default {
+  data() {
+    return {
+      contacts: [
+        { id: 1, name: "John Doe" },
+        { id: 2, name: "Jane Hopper" },
+        { id: 3, name: "Pablo Escobar" },
+        { id: 4, name: "Eleven" },
+        { id: 5, name: "Mike Wheeler" },
+        { id: 6, name: "Will Byers" },
+      ],
+      selectedContact: null,
+      showAddContactModal: false,
+      showDeleteConfirmation: false,
+      contactToDeleteId: null,
+    };
+  },
+  methods: {
+    addContact(newContact) {
+      this.contacts.push({ id: this.contacts.length + 1, ...newContact });
+      this.closeAddContactModal();
+    },
+    editContact(contact) {
+      this.selectedContact = contact;
+    },
+    updateContact(editedContact) {
+      const index = this.contacts.findIndex((c) => c.id === editedContact.id);
+      if (index !== -1) {
+        this.contacts[index] = editedContact;
+        this.selectedContact = null;
+      }
+    },
+    deleteContact(contactId) {
+      this.contacts = this.contacts.filter((c) => c.id !== contactId);
+      this.selectedContact = null;
+    },
+    openAddContactModal() {
+      this.showAddContactModal = true;
+    },
+    closeAddContactModal() {
+      this.showAddContactModal = false;
+    },
+  },
+  components: {
+    ContactList,
+    AddContact,
+    EditContact,
+  },
+};
+</script>
