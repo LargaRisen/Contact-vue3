@@ -37,17 +37,13 @@ import ContactList from "./components/contact/ContactList.vue";
 import AddContact from "./components/contact/AddContact.vue";
 import EditContact from "./components/contact/EditContact.vue";
 
+// apiService.js
+import { apiService } from "./apiService";
+
 export default {
   data() {
     return {
-      contacts: [
-        { id: 1, name: "John Doe" },
-        { id: 2, name: "Jane Hopper" },
-        { id: 3, name: "Pablo Escobar" },
-        { id: 4, name: "Eleven" },
-        { id: 5, name: "Mike Wheeler" },
-        { id: 6, name: "Will Byers" },
-      ],
+      contacts: [],
       selectedContact: null,
       showAddContactModal: false,
       showDeleteConfirmation: false,
@@ -79,6 +75,16 @@ export default {
     closeAddContactModal() {
       this.showAddContactModal = false;
     },
+  },
+  async mounted() {
+    const data = await apiService.getData(
+      "/?inc=id,gender,phone,name&results=11"
+    );
+    this.contacts = data.results.map((contact, index) => ({
+      id: index + 1,
+      name: `${contact.name.first} ${contact.name.last}`,
+      phone: contact.phone,
+    }));
   },
   components: {
     ContactList,

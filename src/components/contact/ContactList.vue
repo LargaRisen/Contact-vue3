@@ -2,6 +2,9 @@
 <template>
   <div>
     <h2 class="text-2xl font-semibold mb-4">Contact List</h2>
+    <!-- if blank, return empty string -->
+    <p v-if="!contacts.length" class="text-gray-600">No contacts found</p>
+    <!-- if not blank, return the list of contacts -->
     <ul
       class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4"
     >
@@ -11,6 +14,7 @@
         class="bg-white p-4 rounded shadow-md"
       >
         <span class="block text-xl font-semibold mb-2">{{ contact.name }}</span>
+        <span class="block text-gray-600 mb-2">{{ contact.phone }}</span>
         <div class="flex justify-end space-x-2">
           <button
             @click="editContact(contact)"

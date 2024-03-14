@@ -14,6 +14,17 @@
           required
         />
       </div>
+      <div class="mb-4">
+        <label for="phone" class="block text-sm font-medium text-gray-600"
+          >Phone:</label
+        >
+        <input
+          v-model="editedContact.phone"
+          type="text"
+          class="mt-1 p-2 block w-full border rounded-md bg-white border-gray-300 focus:outline-none focus:border-indigo-500"
+          required
+        />
+      </div>
       <div class="flex justify-end space-x-2">
         <button
           type="submit"
