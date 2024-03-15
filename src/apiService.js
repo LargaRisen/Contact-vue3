@@ -39,4 +39,18 @@ export const apiService = {
       throw new Error(`Error deleting data from ${endpoint}: ${error}`);
     }
   },
+
+  // Custom request method, can be used for any HTTP method
+  async customRequest(method, url, data) {
+    try {
+      const response = await axios({
+        method,
+        url,
+        data,
+      });
+      return response.data;
+    } catch (error) {
+      throw new Error(`Error with custom request: ${error}`);
+    }
+  },
 };

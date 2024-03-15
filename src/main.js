@@ -3,7 +3,7 @@ import "./assets/main.css";
 import { createApp } from "vue";
 import App from "./App.vue";
 
-import jQuery from "jquery"; // Import jQuery avoid error $ is not defined
+import jQuery from "jquery";
 
 import "tailwindcss/tailwind.css";
 

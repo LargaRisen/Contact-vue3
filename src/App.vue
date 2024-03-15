@@ -24,6 +24,7 @@
       />
     </div>
 
+    <!-- ContactList component -->
     <ContactList
       :contacts="contacts"
       @edit="editContact"
@@ -51,7 +52,16 @@ export default {
     };
   },
   methods: {
-    addContact(newContact) {
+    async addContact(newContact) {
+      const respone = await apiService.customRequest(
+        "POST",
+        "http://localhost:8888/project_shortlink_api/public/contact",
+        newContact
+      );
+      if (respone.code !== 200) {
+        alert("Error adding contact");
+        return;
+      }
       this.contacts.push({ id: this.contacts.length + 1, ...newContact });
       this.closeAddContactModal();
     },
@@ -77,9 +87,14 @@ export default {
     },
   },
   async mounted() {
-    const data = await apiService.getData(
-      "/?inc=id,gender,phone,name&results=11"
+    const data = await apiService.customRequest(
+      "GET",
+      "http://localhost:8888/project_shortlink_api/public/contact",
+      null
     );
+    // const data = await apiService.getData(
+    //   "/?inc=id,gender,phone,name&results=11"
+    // );
     this.contacts = data.results.map((contact, index) => ({
       id: index + 1,
       name: `${contact.name.first} ${contact.name.last}`,
