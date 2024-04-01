@@ -53,4 +53,19 @@ export const apiService = {
       throw new Error(`Error with custom request: ${error}`);
     }
   },
+
+  // Custom request method with headers, can be used for any HTTP method
+  async customRequestWithHeaders(method, url, data, headers) {
+    try {
+      const response = await axios({
+        method,
+        url,
+        data,
+        headers,
+      });
+      return response.data;
+    } catch (error) {
+      throw new Error(`Error with custom request: ${error}`);
+    }
+  },
 };

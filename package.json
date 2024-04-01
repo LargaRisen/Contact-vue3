@@ -1,6 +1,6 @@
 {
   "name": "project_vue_contact",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "private": true,
   "type": "module",
   "scripts": {
@@ -11,10 +11,10 @@
   "dependencies": {
     "autoprefixer": "^10.4.18",
     "axios": "^1.6.7",
-    "jquery": "^3.7.1",
     "postcss": "^8.4.35",
     "tailwindcss": "^3.4.1",
-    "vue": "^3.4.21"
+    "vue": "^3.4.21",
+    "vue-router": "^4.3.0"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^5.0.4",

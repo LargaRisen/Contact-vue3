@@ -1,7 +1,6 @@
 <!-- ContactList.vue -->
 <template>
   <div>
-    <h2 class="text-2xl font-semibold mb-4">Contact List</h2>
     <!-- if blank, return empty string -->
     <p v-if="!contacts.length" class="text-gray-600">No contacts found</p>
     <!-- if not blank, return the list of contacts -->
@@ -11,7 +10,7 @@
       <li
         v-for="contact in contacts"
         :key="contact.id"
-        class="bg-white p-4 rounded shadow-md"
+        class="bg-white p-4 rounded shadow-md border border-gray-200"
       >
         <span class="block text-xl font-semibold mb-2">{{ contact.name }}</span>
         <span class="block text-gray-600 mb-2">{{ contact.phone }}</span>

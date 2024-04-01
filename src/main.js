@@ -3,9 +3,10 @@ import "./assets/main.css";
 import { createApp } from "vue";
 import App from "./App.vue";
 
-import jQuery from "jquery";
+import router from "./router";
 
 import "tailwindcss/tailwind.css";
 
 const app = createApp(App);
+app.use(router);
 app.mount("#app");
