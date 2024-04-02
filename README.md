@@ -1,3 +1,3 @@
-# Contact List
+# Vue3 Sample
 
-This is a simple contact list application built with Vue 3 and Vite.
+This is a simple application built with Vue 3 and Vite.

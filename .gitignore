@@ -29,4 +29,4 @@ coverage
 
 *.tsbuildinfo
 
-version_capture
+# version_capture
